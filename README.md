@@ -1,18 +1,60 @@
-# Senior Fullstack Test - ReactJS/NodeJS
+# fullstack test
 
-## Test 1
-1. Create one form for register (email, password & name) and login
-2. After login can make post and share to LinkedIn & Facebook, have save post content into db before post to FB/LI
-3. Need call API to save db then use sdk send post to social network (facebook/linkedin)
-4. And one API for set cronjob can run each 15 minutes to get number `like / share / comment / etc` of post on social and save into db
-5. Show number `like / share / comment / etc` on browser again in post detail (just need number of counter, e.g: 10 like, 20 share, 40 comments)
+## Introduction
 
-### Deadline of this task
-- Need response this task in 7 days.
+### Backend: Using clean architecture with expressjs
 
-### Note: 
-- Requires using expressjs (can use any view engine express support to connect to api) with typescript
-- Write unittest for typescript code
-- No UI required so you can use any css framework to use and have you can design UI to display
-- After done then push to this Repo and make PR then assign to [me](https://github.com/longthemartec)
-- How to make PR on public repo? check [HERE](https://opensource.com/article/19/7/create-pull-request-github)
+### Frontend: Using reactjs, redux-toolkit, tailwind css
+
+### Database: Postgres
+
+### Database initialization
+
+- cd backend folder
+- Start docker: docker-compose -f docker-compose.local.yml
+- Go to PgAdmin (http://localhost:5050) to register a server
+  - General name: localhost
+  - Connection host name/address: fullstack-test-postgres (postgres container name)
+  - Create database: posts
+
+## Database migrations
+
+If you have made changes to database entities and need to generate a new
+migration, you can do so by issuing the following command:
+
+```sh
+$ cd backend
+$ yarn run typeorm migration:generate -d src/infrastructure/adapters/type-orm/data-source.ts src/infrastructure/adapters/type-orm/migrations/{migration-name}
+```
+
+## Quick start
+
+You can run the project (both frontend and backend) locally with:
+
+```sh
+$ npm run dev
+```
+
+### Frontend
+
+- cd frontend folder
+- npm install
+- npm run dev
+
+### Backend
+
+- cd backend folder
+- npm install
+- npm run dev
+
+### Facebook App
+
+- Create a facebook app (choose type: others)
+- Create a facebook page
+- open Facebook Graph API Explorer
+- select facebook app and page, grant permission: pages_show_list
+  +pages_read_engagement
+  +pages_read_user_content
+  +pages_manage_posts
+  +pages_manage_engagement
+- copy access_token and page_id then paste them to the backend .env file
